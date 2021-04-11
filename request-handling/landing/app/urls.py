@@ -5,6 +5,6 @@ from app.views import landing, stats, index
 
 urlpatterns = [
     path('', index, name='index'),
-    path('landing/', landing, name='landing'),
+    path('landing/<ab_test_arg>/', landing, name='landing'),
     path('stats/', stats, name='stats'),
 ]
