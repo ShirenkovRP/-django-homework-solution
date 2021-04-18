@@ -113,3 +113,4 @@ try:
     from .settings_local import *
 except ImportError:
     pass
+INFLATION_RUSSIA_CSV = os.path.join(BASE_DIR, 'inflation_russia.csv')
