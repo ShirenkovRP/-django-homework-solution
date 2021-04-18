@@ -1,0 +1,40 @@
+{% load change_str_float %}
+
+<table class="u-full-width">
+  <thead>
+  <tr>
+    {% for row_th in tab|first %}
+    <th>{{row_th}}</th>
+    {% endfor %}
+  </tr>
+  </thead>
+
+  <tbody>
+  {% for row in tab|slice:"1:" %}
+  <tr>
+    <td> {{ row|first }}</td>
+
+    {% for td in row|slice:"1:13" %}
+      {% if td|change_str_float < 0 %}
+      <td bgcolor = "#00ff00">{{ td|default:"-"}}</td>
+
+      {% elif td|change_str_float >= 1 and  td|change_str_float < 2 %}
+      <td bgcolor = "#FEA0A0">{{ td|default:"-" }}</td>
+
+      {% elif td|change_str_float >= 2 and  td|change_str_float < 5 %}
+      <td bgcolor = "#FD5D5D">{{ td|default:"-" }}</td>
+
+      {% elif td|change_str_float >= 5 %}
+      <td bgcolor = "#ff0000">{{ td|default:"-" }}</td>
+
+      {% else %}
+      <td>{{ td|default:"-" }}</td>
+      {% endif %}
+    {% endfor %}
+
+    <td bgcolor="#c0c0c0"> {{ row|last }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+
+</table>

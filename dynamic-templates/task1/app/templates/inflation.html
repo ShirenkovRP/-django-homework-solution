@@ -1,3 +1,5 @@
+{% load dict_key %}
+
 <!DOCTYPE html>{% load static %}
 <html>
   <head>
@@ -19,33 +21,7 @@
         <div class="col s12 m8">
 
           <!-- Ваша логика -->
-
-        <table>
-          {% for row_tr in tab %}
-          <tr>
-            {% for value in row_tr %}
-            {% if row_tr|last == value %}
-            <td bgcolor="#c0c0c0">{{value}}</td>
-
-            {% elif value < 0 %}
-            <td bgcolor="#00ff00">{{value}}</td>
-
-            {% elif value >= 1 and  value < 2 %}
-            <td bgcolor="#FEA0A0">{{value}}</td>
-
-            {% elif value >= 2 and  value < 5 %}
-            <td bgcolor="#FD5D5D">{{value}}</td>
-
-            {% elif value > 5 %}
-            <td bgcolor="#ff0000">{{value}}</td>
-
-            {% else %}
-            <td>{{value|default:"-"}}</td>
-            {% endif %}
-            {% endfor %}
-          </tr>
-          {% endfor %}
-        </table>
+        {% include "tab_inflation.html" %}
         </div>
       </div>
     {% endblock %}
