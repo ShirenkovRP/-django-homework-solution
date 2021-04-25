@@ -5,7 +5,12 @@
 {% block content %}
     <div class="container">
         <div class="header">
-            <h1>Телефон</h1>
+            <h5><a href="{% url 'catalog' %}">Назад в каталог</a></h5
+            {% for cell in telephone %}
+                <a href="http://127.0.0.1:8000/catalog/{{ cell.slug }}"  > <h1>{{ cell.name }}</h1> </a>
+                <h5><b>Стоимость: {{ cell.price }} руб</b></h5>
+                <img src="{{ cell.image }}">
+            {% endfor %}
         </div>
         <div class="content">
 
