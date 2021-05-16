@@ -43,7 +43,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         """Метод для валидации. Вызывается при создании и обновлении."""
         user = self.context['request'].user
         ads = Advertisement.objects.select_related().filter(creator__username=user, status='OPEN').count()
-        if ads == 10:
+        if ads > 10:
             raise ValidationError({'error': 'Может быть не более 10 открытых объявлений'})
 
         return data
@@ -63,8 +63,10 @@ class FavoritesSerializer(serializers.ModelSerializer):
         if attrs['advertisement'].status == 'DRAFT':
             raise ValidationError({'error': 'Нельзя добавить в избранное объявление со статусом "Черновик"'})
 
-        existing_fav = Favorites.objects.filter(user=self.context['request'].user)
-        if existing_fav.exists():
+        existing_fav = Favorites.objects.filter(user=self.context['request'].user).filter(advertisement=attrs['advertisement'])
+
+
+        if existing_fav.exists() :
             raise ValidationError({'error': 'Данное объявление уже есть в избранном'})
         return attrs
 
